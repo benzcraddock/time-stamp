@@ -153,6 +153,14 @@ export function TimerProvider({ children }) {
   const createProject = async (name, projectType = 'client') => {
     if (!user) return null
 
+    // Check for duplicate name
+    const existingProject = projects.find(
+      p => p.name.toLowerCase() === name.toLowerCase()
+    )
+    if (existingProject) {
+      throw new Error('A project with this name already exists')
+    }
+
     const color = projectType === 'client'
       ? '#8b5cf6'
       : projectType === 'internal'
