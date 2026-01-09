@@ -388,6 +388,7 @@ a:hover {
 }
 
 /* Keyboard shortcut hints */
+kbd,
 .kbd {
   display: inline-flex;
   align-items: center;

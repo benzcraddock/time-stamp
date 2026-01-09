@@ -35,15 +35,15 @@ export default function WeeklyView() {
 
   const isCurrentWeek = days.some((d) => isToday(d))
 
+  const startDate = format(weekStart, 'yyyy-MM-dd')
+  const endDate = format(weekEnd, 'yyyy-MM-dd')
+
   // Load week data
   const loadWeekData = useCallback(async () => {
     if (!user) return
 
     setLoading(true)
     try {
-      const startDate = format(weekStart, 'yyyy-MM-dd')
-      const endDate = format(weekEnd, 'yyyy-MM-dd')
-
       const { data, error } = await supabase
         .from('time_entries')
         .select('*')
@@ -58,7 +58,7 @@ export default function WeeklyView() {
     } finally {
       setLoading(false)
     }
-  }, [user, weekStart, weekEnd])
+  }, [user, startDate, endDate])
 
   useEffect(() => {
     loadWeekData()
